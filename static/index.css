@@ -1,0 +1,28 @@
+body{
+    padding: 40px;
+    background-color: #222222d8;
+    color: white;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.footer {
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    background-color:#222;
+    border-color: #080808;
+    color: #eee;
+    text-align: center;
+}
+
+
+.container {
+    text-align: left;
+    display: inline block;
+}
+
+.navbar {
+    margin: 0 !important;
+    padding: 0px !important;
+}
