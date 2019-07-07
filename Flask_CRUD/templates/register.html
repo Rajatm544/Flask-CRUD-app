@@ -1,0 +1,68 @@
+{% extends 'bootstrap/base.html' %}
+{% import 'bootstrap/wtf.html' as wtf %}
+
+{% block title %}
+Register
+{% endblock %}
+
+{% block navbar %}
+<nav class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <button class="navbar-toggle" data-toggle="collapse" data-target="#mynavbar">
+                <span class="sr-only">Toggle Navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <span class="navbar-brand">Task Master</span>
+        </div>
+        <div class="collapse navbar-collapse" id="mynavbar">
+            <ul class="nav navbar-nav">
+                <li><a href="{{ url_for('index') }}"><span class="glyphicon glyphicon-home"> Home</span></a></li>
+                <li><a href="{{ url_for('task') }}"><span class="glyphicon glyphicon-tasks"> Tasks</span> </a></li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="{{ url_for('register') }}"><span class="glyphicon glyphicon-user"> Register</span></a></li>
+                <li><a href="{{ url_for('login') }}"><span class="glyphicon glyphicon-log-in"> Login</span></a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+{% endblock %}
+
+{% block styles %}
+{{ super() }}
+<link rel="stylesheet" type="text/css" href="{{ url_for('.static', filename='index.css') }}">
+{% endblock %}
+
+{% block content %}
+<div class="container">
+<h2 class="form-signin-heading">Please Register </h2>
+{% with messages = get_flashed_messages(with_categories=true) %}
+  <!-- Categories: success (green), info (blue), warning (yellow), danger (red) -->
+  {% if messages %}
+    {% for category, message in messages %}
+      <div class="alert alert-{{ category }} alert-dismissible" role="alert">
+      <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+      <!-- <strong>Title</strong> --> {{ message }}
+      </div>
+    {% endfor %}
+  {% endif %}
+{% endwith %}
+</div>
+<div class="container">
+    <form class="form-signin" method="POST" action="/register" autocomplete="off">
+        <input autocomplete="false" name="hidden" type="text" style="display: none">
+        {{ form.hidden_tag() }}
+        {{ wtf.form_field(form.username) }}
+        {{ wtf.form_field(form.password) }}
+        {{ wtf.form_field(form.email) }} 
+        {{ wtf.form_field(form.recaptcha) }}
+        <input type="submit" class="btn btn-default" value="Register">
+    </form> 
+</div>
+<div class="footer">
+    <footer>&copy;2019, Task Master, Rajat M</footer>
+</div>
+
+{% endblock %}
